@@ -157,6 +157,19 @@ namespace Hanssens.Net
         }
 
         /// <summary>
+        /// Removes a key,object entry from the LocalStorage
+        /// If the key doesn't exist, nothing is done (no Exception is thrown)
+        /// </summary>
+        /// <param name="key">Unique key of the entry to be removed.</param>
+        public void Remove(string key)
+        {
+            if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
+
+            if (Storage.Keys.Contains(key))
+                Storage.Remove(key);
+        }
+
+        /// <summary>
         /// Syntax sugar that transforms the response to an IEnumerable<T>, whilst also passing along an optional WHERE-clause. 
         /// </summary>
         public IEnumerable<T> Query<T>(string key, Func<T, bool> predicate = null)
